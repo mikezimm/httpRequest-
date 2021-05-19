@@ -15,10 +15,10 @@ export interface IHttpRequestWebPartProps {
   description: string;
 }
 
-const siteUrl = 'yoursiteurl';
-const siteID = 'siteID';  //Must be Id of Site, not Web
-const ownerGroupID = 'ownerGroupID';
-const targetGroupId = 'targetGroupId';
+const siteUrl = 'https://mcclickster.sharepoint.com/sites/PivotNotInstalled'; //Must be a valid SharePoint Url with the Id and groups below
+const siteID = 'fbeb30c8-3c2a-492d-bacf-1bd6686c9d35';  //Must be Id of Site, not Web
+const ownerGroupID = '84';  //Must be a valid SharePoint Group ID
+const targetGroupId = '103';  //Must be a valid SharePoint Group ID
 
 export default class HttpRequestWebPart extends BaseClientSideWebPart<IHttpRequestWebPartProps> {
   
@@ -43,9 +43,13 @@ export default class HttpRequestWebPart extends BaseClientSideWebPart<IHttpReque
           <div class="${ styles.row }">
             <div class="${ styles.column }">
               <span class="${ styles.title }">Welcome to SharePoint!</span>
-              <p class="${ styles.subTitle }">Customize SharePoint experiences using Web Parts.</p>
+
+              <h2>This is calling the class</h2>
               <div style="padding: 20px 0px" class="groupResultClass">Add result here</div>
+
+              <h2>This is calling the function</h2>
               <div style="padding: 20px 0px" class="groupResultClass2">${result2}</div>
+
             </div>
           </div>
         </div>
