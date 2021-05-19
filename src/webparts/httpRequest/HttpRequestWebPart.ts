@@ -26,13 +26,13 @@ export default class HttpRequestWebPart extends BaseClientSideWebPart<IHttpReque
   private groupResultElement: HTMLElement;
 
   protected onInit(): Promise<void>{
-    this.groupService = new UpdateGroup( this.context.httpClient );
+    this.groupService = new UpdateGroup( this.context.spHttpClient );
     return Promise.resolve();
   }
 
   public render(): void {
 
-    let result = functionUpdateGroup( this.context.httpClient, siteUrl, siteID, targetGroupId, ownerGroupID );
+    let result = functionUpdateGroup( this.context.spHttpClient, siteUrl, siteID, targetGroupId, ownerGroupID );
 
     let result2 = JSON.stringify(result);
 

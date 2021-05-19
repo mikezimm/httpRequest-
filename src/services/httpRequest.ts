@@ -1,5 +1,5 @@
 
-import { HttpClient, HttpClientResponse } from "@microsoft/sp-http";
+import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 const APISiteGetEndPoint : string = '_api/site';
 const APISitePostQueryEndPoint : string = '_vti_bin/client.svc/ProcessQuery';
@@ -27,7 +27,7 @@ function buildGroupOwnerQueryBody( siteGuid: string, targetGroupId: string, owne
 
 }
 
-export async function functionUpdateGroup ( httpClient: HttpClient, siteUrl: string, siteGuid: string, targetGroupId: string, ownerGroupID: string  ) {
+export async function functionUpdateGroup ( httpClient: SPHttpClient, siteUrl: string, siteGuid: string, targetGroupId: string, ownerGroupID: string  ) {
 
   if ( siteUrl.lastIndexOf('/') !== siteUrl.length -1 ) { siteUrl += '/';}
 
@@ -43,20 +43,20 @@ export async function functionUpdateGroup ( httpClient: HttpClient, siteUrl: str
     let errMessage = '';
 
     try {
-      result = await httpClient.post( endpoint, HttpClient.configurations.v1, request);
+      result = await httpClient.post( endpoint, SPHttpClient.configurations.v1, request);
     } catch (e) {
       console.log( 'httpERROR catch: ', e  );
     }
 
     console.log( result );
-    
+
     return result;
 
 }
 
 export class UpdateGroup {
 
-  constructor(private httpClient: HttpClient ) { }
+  constructor(private httpClient: SPHttpClient ) { }
 
   public updateOwner( siteUrl: string, siteGuid: string, targetGroupId: string, ownerGroupID: string ): Promise<any> {
     if ( siteUrl.lastIndexOf('/') !== siteUrl.length -1 ) { siteUrl += '/';}
@@ -69,8 +69,8 @@ export class UpdateGroup {
         body: body
       };
 
-      this.httpClient.post( endpoint, HttpClient.configurations.v1, request)
-      .then((rawResponse: HttpClientResponse) => {
+      this.httpClient.post( endpoint, SPHttpClient.configurations.v1, request)
+      .then((rawResponse: SPHttpClientResponse) => {
           return rawResponse.json();
       })
       .then((jsonResponse: any ) => {
